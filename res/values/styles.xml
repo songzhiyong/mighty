@@ -8,8 +8,7 @@
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+            backward-compatibility can go here.        -->
     </style>
 
     <!-- Application theme. -->
@@ -22,7 +21,7 @@
         <item name="android:homeAsUpIndicator">@drawable/new_indicator</item>
     </style>
 
-    <style name="StyledIndicators" parent="@android:style/Theme.Light">
+    <style name="StyledIndicators" parent="Theme.Sherlock.Light.DarkActionBar">
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="vpiLinePageIndicatorStyle">@style/CustomLinePageIndicator</item>
         <item name="vpiTitlePageIndicatorStyle">@style/CustomTitlePageIndicator</item>

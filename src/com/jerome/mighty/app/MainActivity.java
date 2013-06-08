@@ -11,6 +11,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
+import com.jerome.base.Log;
 import com.jerome.mighty.R;
 import com.jerome.mighty.temp.ColorFragment;
 import com.jerome.mighty.temp.SampleListFragment;
@@ -18,7 +19,22 @@ import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.viewpagerindicator.TabPageIndicator;
 
+/**
+ * 
+ * ClassName:MainActivity <br >
+ * Function: TODO ADD FUNCTION <br >
+ * Reason: TODO ADD REASON <br >
+ * 
+ * @author Jerome Song
+ * @version
+ * @since Ver 1.1
+ * @Date 2013 2013-6-7 下午9:07:50
+ * 
+ * @see
+ */
 public class MainActivity extends SlidingFragmentActivity {
+	private static final String[] CONTENT = new String[] { "1", "2",
+			"3", "4", "5", "6" };
 	protected ListFragment mFrag;
 
 	@Override
@@ -37,10 +53,14 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		ViewPager vp = (ViewPager) findViewById(R.id.pager);
 		vp.setAdapter(new ColorPagerAdapter(getSupportFragmentManager()));
-		vp.setOnPageChangeListener(new OnPageChangeListener() {
+		vp.setCurrentItem(0);
+		setBehindContentView(R.layout.menu_frame);
+		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		indicator.setViewPager(vp);
+		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 
@@ -50,21 +70,18 @@ public class MainActivity extends SlidingFragmentActivity {
 			public void onPageSelected(int position) {
 				switch (position) {
 				case 0:
+					Log.i("MainActivity", "TOUCHMODE_FULLSCREEN");
 					getSlidingMenu().setTouchModeAbove(
 							SlidingMenu.TOUCHMODE_FULLSCREEN);
 					break;
 				default:
+					Log.i("MainActivity", "TOUCHMODE_MARGIN");
 					getSlidingMenu().setTouchModeAbove(
 							SlidingMenu.TOUCHMODE_MARGIN);
 					break;
 				}
 			}
 		});
-		vp.setCurrentItem(0);
-		setBehindContentView(R.layout.menu_frame);
-		// TabPageIndicator indicator = (TabPageIndicator)
-		// findViewById(R.id.indicator);
-		// indicator.setViewPager(vp);
 	}
 
 	public class ColorPagerAdapter extends FragmentPagerAdapter {
@@ -81,6 +98,11 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		public int getCount() {
 			return mFragments.size();
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return CONTENT[position % CONTENT.length].toUpperCase();
 		}
 
 		public Fragment getItem(int position) {

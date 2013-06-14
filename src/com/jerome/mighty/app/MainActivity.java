@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,8 +14,11 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
@@ -43,14 +47,15 @@ import com.viewpagerindicator.TabPageIndicator;
  * @see
  */
 public class MainActivity extends SlidingFragmentActivity {
-	private static final String[] CONTENT = new String[] { "1", "2", "3", "4",
-			"5", "6" };
-	protected ListFragment mFrag;
+	private static final String[] CONTENT = new String[] { "本地", "跟帖", "图片",
+			"话题", "投票", "微生活" };
+	protected Fragment mFrag;
 	private JazzyViewPager vp;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.layout_main);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
@@ -74,10 +79,10 @@ public class MainActivity extends SlidingFragmentActivity {
 				(int) (getResources().getDisplayMetrics().widthPixels * 0.5f));
 		getSlidingMenu().requestLayout();
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		// getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// viewpager/////////////////////////////////
 		vp = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		vp.setTransitionEffect(TransitionEffect.CubeOut);
+		vp.setTransitionEffect(TransitionEffect.Tablet);
 		vp.setAdapter(new ColorPagerAdapter(getSupportFragmentManager()));
 		// vp.setAdapter(new MainAdapter());
 		vp.setPageMargin(30);
@@ -110,10 +115,18 @@ public class MainActivity extends SlidingFragmentActivity {
 		});
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			getSlidingMenu().toggle();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
 	public class ColorPagerAdapter extends FragmentPagerAdapter {
 		private ArrayList<Fragment> mFragments;
 		private final int[] COLORS = new int[] { R.color.red, R.color.green,
-				R.color.blue, R.color.holo_blue, R.color.black };
+				R.color.blue, R.color.holo_blue, R.color.black, R.color.gray };
 
 		@Override
 		public Object instantiateItem(ViewGroup container, final int position) {
@@ -143,6 +156,17 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 	}
 
+	public void switchContent(int pos) {
+		vp.setCurrentItem(pos);
+		Handler h = new Handler();
+		h.postDelayed(new Runnable() {
+			public void run() {
+				getSlidingMenu().showContent();
+			}
+		}, 50);
+	}
+
+	// 无用
 	private class MainAdapter extends PagerAdapter {
 		@Override
 		public Object instantiateItem(ViewGroup container, final int position) {

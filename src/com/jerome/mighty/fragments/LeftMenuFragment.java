@@ -15,15 +15,19 @@ package com.jerome.mighty.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jerome.mighty.R;
+import com.jerome.mighty.app.MainActivity;
+import com.jerome.mighty.temp.ColorFragment;
 
 /**
  * ClassName:LeftMenu <br>
@@ -90,6 +94,21 @@ public class LeftMenuFragment extends ListFragment {
 			return convertView;
 		}
 
+	}
+
+	public void onListItemClick(ListView lv, View v, int position, long id) {
+		Fragment newContent = new ColorFragment(position);
+		if (newContent != null)
+			switchFragment(position);
+	}
+
+	private void switchFragment(int pos) {
+		if (getActivity() == null)
+			return;
+		if (getActivity() instanceof MainActivity) {
+			MainActivity activity = (MainActivity) getActivity();
+			activity.switchContent(pos);
+		}
 	}
 
 	private int getResourceId(String name) {

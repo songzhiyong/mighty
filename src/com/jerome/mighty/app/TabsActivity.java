@@ -19,12 +19,13 @@ import com.jerome.base.BaseActivity;
 import com.jerome.mighty.R;
 
 /**
- * ClassName:TabsActivity Function: TODO ADD FUNCTION Reason: TODO ADD REASON
+ * 
+ * ClassName:TabsActivity <br>
+ * Function: TODO ADD FUNCTION <br>
  * 
  * @author Jerry
  * @version
- * @since Ver 1.1
- * @Date 2013-6-13 下午4:08:45
+ * @Date 2013 2013-6-14 下午5:19:19
  * 
  * @see
  */

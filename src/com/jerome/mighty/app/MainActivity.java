@@ -20,12 +20,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.jerome.mighty.R;
 import com.jerome.mighty.fragments.LeftMenuFragment;
 import com.jerome.mighty.temp.ColorFragment;
+import com.jerome.mighty.temp.PicsFragment;
 import com.jerome.mighty.temp.SampleListFragment;
+import com.jerome.mighty.temp.WebViewFragment;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 import com.jfeinstein.jazzyviewpager.OutlineContainer;
@@ -51,6 +54,7 @@ public class MainActivity extends SlidingFragmentActivity {
 			"话题", "投票", "微生活" };
 	protected Fragment mFrag;
 	private JazzyViewPager vp;
+	private TabPageIndicator indicator;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		vp.setPageMargin(30);
 		vp.setCurrentItem(0);
 		setBehindContentView(R.layout.menu_frame);
-		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(vp);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
@@ -138,8 +142,15 @@ public class MainActivity extends SlidingFragmentActivity {
 		public ColorPagerAdapter(FragmentManager fm) {
 			super(fm);
 			mFragments = new ArrayList<Fragment>();
-			for (int color : COLORS)
-				mFragments.add(new ColorFragment(color));
+			for (int color : COLORS) {
+				if (color == R.color.holo_blue) {
+					mFragments.add(new WebViewFragment());
+				} else if (color == R.color.blue) {
+					mFragments.add(new PicsFragment());
+				} else {
+					mFragments.add(new ColorFragment(color));
+				}
+			}
 		}
 
 		public int getCount() {
@@ -204,6 +215,18 @@ public class MainActivity extends SlidingFragmentActivity {
 				return view == obj;
 			}
 		}
+	}
+
+	public void showTopIndicator() {
+		indicator.startAnimation(AnimationUtils.loadAnimation(this,
+				R.anim.slide_in_from_top));
+		indicator.setVisibility(View.VISIBLE);
+	}
+
+	public void hideTopIndicator() {
+		indicator.startAnimation(AnimationUtils.loadAnimation(this,
+				R.anim.slide_out_to_top));
+		indicator.setVisibility(View.GONE);
 	}
 
 }

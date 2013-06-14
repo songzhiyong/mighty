@@ -4,5 +4,14 @@
     <string name="app_name">Mighty</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <!-- 左侧菜单列表 -->
+    <string-array name="left_menu">
+        <item>本地</item>
+        <item>跟帖</item>
+        <item>图片</item>
+        <item>话题</item>
+        <item>投票</item>
+        <item>微生活</item>
+    </string-array>
 
 </resources>

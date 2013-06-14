@@ -3,5 +3,6 @@
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" />
+    android:background="@drawable/left_menu_bg"
+    android:listSelector="@drawable/left_menu_selector"
+    android:divider="@drawable/night_biz_main_tab_divider" />

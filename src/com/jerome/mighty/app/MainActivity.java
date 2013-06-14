@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 import com.jerome.mighty.R;
+import com.jerome.mighty.fragments.LeftMenuFragment;
 import com.jerome.mighty.temp.ColorFragment;
 import com.jerome.mighty.temp.SampleListFragment;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
@@ -44,14 +47,14 @@ public class MainActivity extends SlidingFragmentActivity {
 			"5", "6" };
 	protected ListFragment mFrag;
 	private JazzyViewPager vp;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_main);
 		FragmentTransaction t = this.getSupportFragmentManager()
 				.beginTransaction();
-		mFrag = new SampleListFragment();
+		mFrag = new LeftMenuFragment();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
 		// customize the SlidingMenu////////////////////
@@ -60,13 +63,16 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		sm.setMode(SlidingMenu.LEFT_RIGHT);
-		sm.setSecondaryMenu(R.layout.menu_frame_two);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.menu_frame_two, new SampleListFragment())
-				.commit();
-		sm.setShadowDrawable(R.drawable.shadow);
+		// sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// sm.setMode(SlidingMenu.LEFT_RIGHT);
+		// sm.setSecondaryMenu(R.layout.menu_frame_two);
+		// getSupportFragmentManager().beginTransaction()
+		// .replace(R.id.menu_frame_two, new SampleListFragment())
+		// .commit();
+
+		getSlidingMenu().setBehindWidth(
+				(int) (getResources().getDisplayMetrics().widthPixels * 0.5f));
+		getSlidingMenu().requestLayout();
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// viewpager/////////////////////////////////
@@ -80,28 +86,28 @@ public class MainActivity extends SlidingFragmentActivity {
 		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(vp);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-//		indicator.setOnPageChangeListener(new OnPageChangeListener() {
-//			public void onPageScrollStateChanged(int arg0) {
-//			}
-//
-//			public void onPageScrolled(int arg0, float arg1, int arg2) {
-//			}
-//
-//			public void onPageSelected(int position) {
-//				switch (position) {
-//				case 0:
-//					Log.i("MainActivity", "TOUCHMODE_FULLSCREEN");
-//					getSlidingMenu().setTouchModeAbove(
-//							SlidingMenu.TOUCHMODE_FULLSCREEN);
-//					break;
-//				default:
-//					Log.i("MainActivity", "TOUCHMODE_MARGIN");
-//					getSlidingMenu().setTouchModeAbove(
-//							SlidingMenu.TOUCHMODE_MARGIN);
-//					break;
-//				}
-//			}
-//		});
+		indicator.setOnPageChangeListener(new OnPageChangeListener() {
+			public void onPageScrollStateChanged(int arg0) {
+			}
+
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			public void onPageSelected(int position) {
+				switch (position) {
+				case 0:
+					Log.i("MainActivity", "TOUCHMODE_FULLSCREEN");
+					getSlidingMenu().setTouchModeAbove(
+							SlidingMenu.TOUCHMODE_FULLSCREEN);
+					break;
+				default:
+					Log.i("MainActivity", "TOUCHMODE_MARGIN");
+					getSlidingMenu().setTouchModeAbove(
+							SlidingMenu.TOUCHMODE_MARGIN);
+					break;
+				}
+			}
+		});
 	}
 
 	public class ColorPagerAdapter extends FragmentPagerAdapter {

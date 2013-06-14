@@ -44,7 +44,7 @@ public class MainActivity extends SlidingFragmentActivity {
 			"5", "6" };
 	protected ListFragment mFrag;
 	private JazzyViewPager vp;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

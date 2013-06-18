@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="10" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="com.jerome.mighty.app.MightyApp"
@@ -19,13 +20,17 @@
             android:name="com.jerome.mighty.app.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.PageIndicatorDefaults" >
+        </activity>
+        <activity android:name=".app.TabsActivity" >
+        </activity>
+        <activity
+            android:name=".app.LoginActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".app.TabsActivity" >
         </activity>
     </application>
 

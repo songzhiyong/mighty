@@ -13,15 +13,21 @@
 
 package com.jerome.mighty.temp;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jerome.mighty.R;
 
@@ -38,6 +44,9 @@ import com.jerome.mighty.R;
  * @see
  */
 public class PicsFragment extends ListFragment {
+	private int mSelectedRow;
+	private QuickAction mQuickAction;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -52,6 +61,56 @@ public class PicsFragment extends ListFragment {
 					android.R.drawable.ic_menu_search));
 		}
 		setListAdapter(adapter);
+		mQuickAction = new QuickAction(getActivity());
+		ActionItem addItem = new ActionItem(0, "Add", getResources()
+				.getDrawable(R.drawable.ic_add));
+		ActionItem acceptItem = new ActionItem(1, "Accept", getResources()
+				.getDrawable(R.drawable.ic_accept));
+		ActionItem uploadItem = new ActionItem(2, "Upload", getResources()
+				.getDrawable(R.drawable.ic_up));
+
+		acceptItem.setSelected(true);
+		mQuickAction.addActionItem(addItem);
+		mQuickAction.addActionItem(acceptItem);
+		mQuickAction.addActionItem(uploadItem);
+		// setup the action item click listener
+		mQuickAction
+				.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+					@Override
+					public void onItemClick(QuickAction quickAction, int pos,
+							int actionId) {
+						ActionItem actionItem = quickAction.getActionItem(pos);
+
+						if (actionId == 0) { // Add item selected
+							Toast.makeText(getActivity(),
+									"Add item selected on row " + mSelectedRow,
+									Toast.LENGTH_SHORT).show();
+						} else {
+							Toast.makeText(
+									getActivity(),
+									actionItem.getTitle()
+											+ " item selected on row "
+											+ mSelectedRow, Toast.LENGTH_SHORT)
+									.show();
+						}
+					}
+				});
+
+		// setup on dismiss listener, set the icon back to normal
+		mQuickAction.setOnDismissListener(new PopupWindow.OnDismissListener() {
+			@Override
+			public void onDismiss() {
+				// mMoreIv.setImageResource(R.drawable.ic_list_more);
+			}
+		});
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				mSelectedRow = position;
+				mQuickAction.show(view);
+			}
+		});
 	}
 
 	private class SampleItem {

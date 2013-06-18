@@ -2,36 +2,27 @@ package com.jerome.mighty.app;
 
 import java.util.ArrayList;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import com.jerome.mighty.R;
 import com.jerome.mighty.fragments.LeftMenuFragment;
 import com.jerome.mighty.temp.ColorFragment;
 import com.jerome.mighty.temp.PicsFragment;
-import com.jerome.mighty.temp.SampleListFragment;
 import com.jerome.mighty.temp.WebViewFragment;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
-import com.jfeinstein.jazzyviewpager.OutlineContainer;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.viewpagerindicator.TabPageIndicator;
@@ -86,7 +77,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		// getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// viewpager/////////////////////////////////
 		vp = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		vp.setTransitionEffect(TransitionEffect.Tablet);
+		vp.setTransitionEffect(TransitionEffect.Stack);
 		vp.setAdapter(new ColorPagerAdapter(getSupportFragmentManager()));
 		// vp.setAdapter(new MainAdapter());
 		vp.setPageMargin(30);
@@ -175,46 +166,6 @@ public class MainActivity extends SlidingFragmentActivity {
 				getSlidingMenu().showContent();
 			}
 		}, 50);
-	}
-
-	// 无用
-	private class MainAdapter extends PagerAdapter {
-		@Override
-		public Object instantiateItem(ViewGroup container, final int position) {
-			TextView text = new TextView(MainActivity.this);
-			text.setGravity(Gravity.CENTER);
-			text.setTextSize(30);
-			text.setTextColor(Color.WHITE);
-			text.setText("Page " + position);
-			text.setPadding(30, 30, 30, 30);
-			int bg = Color.rgb((int) Math.floor(Math.random() * 128) + 64,
-					(int) Math.floor(Math.random() * 128) + 64,
-					(int) Math.floor(Math.random() * 128) + 64);
-			text.setBackgroundColor(bg);
-			container.addView(text, LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT);
-			vp.setObjectForPosition(text, position);
-			return text;
-		}
-
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object obj) {
-			container.removeView(vp.findViewFromObject(position));
-		}
-
-		@Override
-		public int getCount() {
-			return 10;
-		}
-
-		@Override
-		public boolean isViewFromObject(View view, Object obj) {
-			if (view instanceof OutlineContainer) {
-				return ((OutlineContainer) view).getChildAt(0) == obj;
-			} else {
-				return view == obj;
-			}
-		}
 	}
 
 	public void showTopIndicator() {

@@ -138,7 +138,7 @@ public class PicsFragment extends ListFragment {
 						R.layout.item_pic, null);
 			}
 			Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-					R.drawable.troop_default_head_1);
+					R.drawable.ic_launcher);
 			ImageView icon = (ImageView) convertView.findViewById(R.id.iv_pic);
 			icon.setImageBitmap(BitmapUtils.getRoundedCornerBitmap(bitmap, 5,
 					bitmap.getWidth(), bitmap.getHeight()));

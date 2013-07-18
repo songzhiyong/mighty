@@ -77,7 +77,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		// getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// viewpager/////////////////////////////////
 		vp = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		vp.setTransitionEffect(TransitionEffect.Stack);
+		vp.setTransitionEffect(TransitionEffect.Tablet);
 		vp.setAdapter(new ColorPagerAdapter(getSupportFragmentManager()));
 		// vp.setAdapter(new MainAdapter());
 		vp.setPageMargin(30);

@@ -13,13 +13,6 @@
 
 package com.jerome.mighty.data.dao;
 
-import java.io.File;
-import java.io.InputStream;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
 /**
  * AccountDaoHelper Function: TODO ADD FUNCTION

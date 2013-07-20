@@ -13,10 +13,8 @@
 
 package com.jerome.mighty.app;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.ImageView;
 
 import com.jerome.base.BaseActivity;
 import com.jerome.mighty.R;
@@ -37,10 +35,6 @@ public class LoginActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.layout_login);
-		ImageView img = (ImageView) findViewById(R.id.iv_login_main);
-		img.setBackgroundResource(R.drawable.login_main);
-		AnimationDrawable frameAnimation = (AnimationDrawable) img
-				.getBackground();
-		frameAnimation.start();
 	}
+
 }

@@ -12,6 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="83.0dip"
         android:background="@drawable/card_avatar"
+        android:contentDescription="@string/image"
         android:scaleType="fitXY"
         android:src="@drawable/login_default_avatar" />
 

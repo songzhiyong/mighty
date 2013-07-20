@@ -32,6 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jerome.mighty.R;
+import com.jerome.mighty.app.music.MusicPlayActivity;
+import com.jerome.utils.Start;
 import com.jerome.utils.media.BitmapUtils;
 
 /**
@@ -83,7 +85,7 @@ public class PicsFragment extends ListFragment {
 					public void onItemClick(QuickAction quickAction, int pos,
 							int actionId) {
 						ActionItem actionItem = quickAction.getActionItem(pos);
-
+						Start.start(getActivity(), MusicPlayActivity.class);
 						if (actionId == 0) { // Add item selected
 							Toast.makeText(getActivity(),
 									"Add item selected on row " + mSelectedRow,

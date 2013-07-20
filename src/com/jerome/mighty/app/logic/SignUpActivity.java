@@ -11,7 +11,7 @@
  * Copyright (c) 2013, JEROME All Rights Reserved.
  */
 
-package com.jerome.mighty.app;
+package com.jerome.mighty.app.logic;
 
 import com.jerome.base.BaseActivity;
 

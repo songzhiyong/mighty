@@ -1,6 +1,7 @@
 package com.jerome.mighty.app;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,7 +43,7 @@ import com.viewpagerindicator.TabPageIndicator;
  */
 public class MainActivity extends SlidingFragmentActivity {
 	private static final String[] CONTENT = new String[] { "本地", "跟帖", "图片",
-			"话题", "投票", "微生活" };
+			"话题", "投票", "音乐" };
 	protected Fragment mFrag;
 	private JazzyViewPager vp;
 	private TabPageIndicator indicator;
@@ -77,7 +78,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		// getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// viewpager/////////////////////////////////
 		vp = (JazzyViewPager) findViewById(R.id.jazzy_pager);
-		vp.setTransitionEffect(TransitionEffect.Tablet);
+		vp.setTransitionEffect(TransitionEffect.CubeOut);
 		vp.setAdapter(new ColorPagerAdapter(getSupportFragmentManager()));
 		// vp.setAdapter(new MainAdapter());
 		vp.setPageMargin(30);

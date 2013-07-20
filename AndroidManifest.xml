@@ -26,12 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.TabsActivity" >
-        </activity>
+        <activity android:name=".app.TabsActivity" />
         <activity
-            android:name=".app.LoginActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:name="com.jerome.mighty.app.logic.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.jerome.mighty.app.music.MusicPlayActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

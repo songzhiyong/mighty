@@ -16,6 +16,8 @@ package com.jerome.mighty.temp;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jerome.mighty.R;
+import com.jerome.utils.media.BitmapUtils;
 
 /**
  * ClassName:PicsFragment<br>
@@ -134,8 +137,11 @@ public class PicsFragment extends ListFragment {
 				convertView = LayoutInflater.from(getContext()).inflate(
 						R.layout.item_pic, null);
 			}
+			Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher);
 			ImageView icon = (ImageView) convertView.findViewById(R.id.iv_pic);
-			icon.setImageResource(getItem(position).iconRes);
+			icon.setImageBitmap(BitmapUtils.getRoundedCornerBitmap(bitmap, 5,
+					bitmap.getWidth(), bitmap.getHeight()));
 			TextView title = (TextView) convertView.findViewById(R.id.tv_text);
 			title.setText(getItem(position).tag);
 

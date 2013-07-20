@@ -13,7 +13,6 @@
 
 package com.jerome.mighty.data.dao;
 
-
 /**
  * AccountDaoHelper Function: TODO ADD FUNCTION
  * 

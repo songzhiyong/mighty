@@ -1,7 +1,6 @@
 package com.jerome.mighty.app;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Handler;
